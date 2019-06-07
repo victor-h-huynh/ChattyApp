@@ -15,7 +15,7 @@ git remote add origin [YOUR NEW REPOSITORY]
 # Manually update your package.json file
 ```
 
-Install the dependencies and start the server.
+Install the dependencies and start the server.np
 
 ```
 npm install

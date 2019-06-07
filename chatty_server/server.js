@@ -39,7 +39,7 @@ wss.on('connection', (ws) => {
 
 
 ws.on('message', function incoming(data) {
-    data = JSON.parse(data);
+    data = JSON.parse(data);    
     
     let infoMessage = {};
 

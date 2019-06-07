@@ -12,4 +12,4 @@ A simple single-page AJAX based Twitter clone that uses jQuery, HTML5 and plain 
 
 ## Screenshots
 
-!["Screenshot of chatty messages"](https://github.com/lighthouse-labs/chatty/blob/master/docs/chattyApp.png)
+!["Screenshot of chatty messages"](https://github.com/lighthouse-labs/chatty/blob/master/docs/ChattyApp.png)

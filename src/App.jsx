@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     this.webSocket = new WebSocket("ws://localhost:3001/");
     this.state =  {
-      currentUser: {name: "Bob"},
+      currentUser: {name: "Anon", id: 0},
       messages: [],
       clientSize: 0
     };
@@ -29,23 +29,21 @@ class App extends Component {
 
   showNotification = nameChange => {
     const oldName = this.state.messages;
+    console.log(nameChange)
     const newName = [...oldName, {
-      username: `${this.state.currentUser.name} has changed his name to ${nameChange.username}`,
+      username: `${nameChange.username} has changed his name to ${nameChange.newusername}`,
       id: nameChange.id,
       type: nameChange.type,
       content: ""
     }]
     this.setState({
-      currentUser: {name: nameChange.username},
-      messages: newName
+      
+      messages: newName,
+    
     })
   };
 
-changeUser = name => {
-  this.setState({
-    currentUser: {name: name}
-  })
-}
+
 
   sendNewMessage = content => {
     const userName = {
@@ -56,14 +54,34 @@ changeUser = name => {
     this.webSocket.send(JSON.stringify(userName));
   }
 
-  sendNotification = name => {
-    const newName = {
-      username: name,
+  sendNotification = (oldName, newName) => {
+ 
+    const newNameObj = {
+      newusername: newName,
+      username: oldName,
       type: "postNotification"
     }
-    this.webSocket.send(JSON.stringify(newName));
+
+    this.setState({
+      
+      currentUser : {...this.state.currentUser, name: newName},
+    
+    })
+
+
+
+    this.webSocket.send(JSON.stringify(newNameObj));
   }
 
+
+  changeUser = name => {
+    const newName = name
+    const oldName = this.state.currentUser.name
+    
+   
+
+    this.sendNotification(oldName, newName);
+  }
   componentDidMount() {
     
     this.webSocket.addEventListener("open",function(event) {})      
@@ -78,7 +96,8 @@ changeUser = name => {
         this.showNotification(receiveData);
         break;
         case 'clientSize':
-        this.setState({ clientSize: receiveData.clients })
+          console.log(receiveData)
+        this.setState({currentUser : {name: receiveData.name, id: receiveData.id}, clientSize: receiveData.clients })
       }
     }
   }
@@ -93,7 +112,7 @@ changeUser = name => {
     <h1 className="usersOnline"> Users Online: {this.state.clientSize}</h1>
   </nav>
     <MessageList messages={this.state.messages}/>
-    <ChatBar sendNotification={this.sendNotification} sendNewMessage={this.sendNewMessage} currentUser={this.state.currentUser} messages={this.state.messages}/>
+    <ChatBar changeUser={this.changeUser} sendNotification={this.sendNotification} sendNewMessage={this.sendNewMessage} currentUser={this.state.currentUser} messages={this.state.messages}/>
 </div>
     )}
 }

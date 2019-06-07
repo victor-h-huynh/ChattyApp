@@ -36,7 +36,7 @@ class ChatBar extends Component {
   handleKeyUpName = event => {
     if (event.key === 'Enter') {
       // Need to send content to the App
-      this.props.sendNotification(this.state.userName);
+      this.props.changeUser(this.state.userName);
       // Reset the content of the text area
     }
   };

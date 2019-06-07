@@ -31,7 +31,9 @@ wss.on('connection', (ws) => {
   
     const clientSize = {
         clients: wss.clients.size,
-        type: "clientSize"
+        type: "clientSize",
+        name: `anonymous${wss.clients.size}`,
+        id: uuidv4()
     }
     wss.broadcast(JSON.stringify(clientSize));
 
@@ -60,6 +62,7 @@ ws.on('message', function incoming(data) {
             infoMessage = {
                 id: uuidv4(),
                 username: data.username,
+                newusername: data.newusername,
                 content: data.content,
                 type: 'incomingNotification'
             }

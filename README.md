@@ -1,10 +1,23 @@
-# Tweeter Project
+Chatty App
 =====================
 
-A simple single-page AJAX based Twitter clone that uses jQuery, HTML5 and plain ol' CSS3 to help web bootcamp students get comfortable with their front-end chops with these technologies.
+Chatty App is a real-time chat application that uses ReactJS with Websockets to provide
+instant messaging.
+
+### Usage
+
+Install the dependencies and start the server.
+
+```
+npm install
+npm start
+open http://localhost:3000
+```
 
 ### Dependencies
-
+* express: "4.17.1",
+* uuid: "^3.3.2",
+* ws: "7.0.0
 * React
 * Webpack
 * [babel-loader](https://github.com/babel/babel-loader)

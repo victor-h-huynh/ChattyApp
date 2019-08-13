@@ -12,7 +12,7 @@ class MessageList extends Component {
         ))
 
         return (<main className="messages">
-            {messagesList}
+            {messagesList}  
     
     <div className="message system">
           
